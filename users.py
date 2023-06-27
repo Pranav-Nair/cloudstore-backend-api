@@ -116,7 +116,7 @@ def change_cred(choice):
             opass=request.json.get("passwd","")
             npass = request.json.get("new_passwd","")
             cpass= request.json.get("confirm_passwd","")
-            if not opass or npass or not cpass:
+            if not opass or not npass or not cpass:
                 return jsonify({
                     "error": "missing fields",
                     "fields_required": ["passwd","new_passwd","confirm_passwd"]
@@ -128,7 +128,7 @@ def change_cred(choice):
                 user.save()
                 return jsonify({"message":"password changed"}),200
             else:
-                return jsonify({"error":"olp password is wrong"}),400
+                return jsonify({"error":"old password is wrong"}),400
     else:
         return jsonify({"error":"invalid choice"}),400
 
